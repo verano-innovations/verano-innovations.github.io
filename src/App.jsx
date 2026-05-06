@@ -1,45 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FaSun, FaEnvelope, FaInfoCircle, FaHome, FaArrowRight, FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle, FaCode, FaPalette, FaCloud } from 'react-icons/fa';
+import { FaSun, FaEnvelope, FaInfoCircle, FaHome, FaArrowRight, FaGithub, FaLinkedin, FaCode, FaPalette, FaCloud } from 'react-icons/fa';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setFormStatus('idle'), 5000);
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setFormStatus('idle');
-      alert('Failed to send message. Please try again.');
-    }
-  };
 
   const navItems = [
     { id: 'home', label: 'Home', icon: FaHome },
@@ -176,75 +139,25 @@ const App = () => {
 
         {/* CONTACT SECTION */}
         {activeTab === 'contact' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-xl mx-auto">
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-white mb-4">Get in Touch</h2>
               <p className="text-slate-400">Have a vision? We'd love to hear about it. Send us a message and we'll get back to you within 24 hours.</p>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-              {formStatus === 'success' ? (
-                <div className="py-12 text-center animate-in zoom-in duration-300">
-                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <FaCheckCircle className="text-white w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                  <p className="text-slate-400 mb-6">Thank you for reaching out. We'll be in touch soon.</p>
-                  <button 
-                    onClick={() => setFormStatus('idle')}
-                    className="text-yellow-400 font-bold hover:underline"
-                  >
-                    Send another message
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2 uppercase tracking-wider">Full Name</label>
-                    <input 
-                      required
-                      type="text"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors"
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2 uppercase tracking-wider">Email Address</label>
-                    <input 
-                      required
-                      type="email"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors"
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2 uppercase tracking-wider">Message</label>
-                    <textarea 
-                      required
-                      rows="4"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors resize-none"
-                      placeholder="Tell us briefly about your project..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    ></textarea>
-                  </div>
-                  <button 
-                    disabled={formStatus === 'sending'}
-                    type="submit"
-                    className="w-full py-4 bg-yellow-400 text-black font-bold rounded-xl hover:bg-yellow-300 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {formStatus === 'sending' ? 'Sending...' : (
-                      <>
-                        Send Message <FaPaperPlane size={18} />
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl py-8 px-1 shadow-2xl relative overflow-hidden">
+              <div className="w-full flex justify-center overflow-hidden h-[720px]">
+                <iframe 
+                  src="https://docs.google.com/forms/d/e/1FAIpQLScnQUTQT04K6xb-8F1RyaZ_fYN_cy7tOoR8qKLpzHs1EOGo3w/viewform?embedded=true" 
+                  width="100%" 
+                  height="711" 
+                  frameBorder="0" 
+                  marginHeight="0" 
+                  marginWidth="0"
+                  className="rounded-lg"
+                  scrolling="no"
+                >Loading…</iframe>
+              </div>
             </div>
             
             <div className="mt-12 flex justify-center gap-8 text-slate-500">
