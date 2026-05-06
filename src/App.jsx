@@ -156,6 +156,9 @@ const App = () => {
                   marginWidth="0"
                   className="rounded-lg"
                   scrolling="no"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                  referrerPolicy="no-referrer-when-downgrade"
                 >Loading…</iframe>
               </div>
             </div>
