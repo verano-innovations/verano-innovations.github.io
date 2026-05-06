@@ -24,7 +24,7 @@ const App = () => {
     if (!formData.email.trim()) {
       errors.email = 'Email is required';
     } else if (!validateEmail(formData.email)) {
-      errors.email = 'Please enter a valid email address';
+      errors.email = 'Email is required';
     }
     
     if (!formData.message.trim()) {
@@ -254,7 +254,7 @@ const App = () => {
                   <div>
                     <label className="block text-sm font-medium text-slate-400 mb-2 uppercase tracking-wider">Email Address</label>
                     <input 
-                      type="email"
+                      type="text"
                       className={`w-full bg-slate-950 border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${
                         formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-800 focus:border-yellow-400'
                       }`}
